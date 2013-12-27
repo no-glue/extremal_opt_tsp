@@ -1,6 +1,6 @@
 # ExtremalOptTsp
 
-TODO: Write a gem description
+  Extremal optimization to solve travelling salesman
 
 ## Installation
 
@@ -18,7 +18,9 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+    ExtremalOptTsp::ExtremalOptTsp.new.search([[565,575],[25,185]], 250, 1.8)[:cost])
+    250 - max iterations
+    1.8 - t
 
 ## Contributing
 
