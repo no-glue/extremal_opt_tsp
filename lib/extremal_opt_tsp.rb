@@ -30,7 +30,7 @@ module ExtremalOptTsp
     # neighbors, get them ranked
     def get_neighbor_rank(city_number, cities, ignore=[])
       neighbors = []
-      cities.each_with_index do |cities, i|
+      cities.each_with_index do |city, i|
         next if i == city_number or ignore.include?(i)
         neighbor = {:number => i}
         neighbor[:distance] = euc_2d(cities[city_number], city)
@@ -90,7 +90,7 @@ module ExtremalOptTsp
       selection = rand()
       comps.each_with_index do |comp, i|
         selection -= (comp[:prob] / sum_probs)
-        return component[:number] if selection <= 0.0
+        return comp[:number] if selection <= 0.0
       end
       return comps.last[:number]
     end
@@ -129,7 +129,7 @@ module ExtremalOptTsp
     # new shake
     def new_shake(cities, t, sh)
       city_fitnesses = get_city_fitnesses(cities, sh)
-      selected_city = select_maybe(city_fitnesses,reverse, t)
+      selected_city = select_maybe(city_fitnesses.reverse, t)
       edges = get_edges_for_city(selected_city, sh)
       neighbors = get_neighbor_rank(selected_city, cities)
       new_neighbor = select_maybe(neighbors, t, edges)
@@ -140,7 +140,7 @@ module ExtremalOptTsp
     # search
     def search(cities, max_iterations, t)
       current = {:vector => shake(cities)}
-      current[:cost] = cost(current[:vecetor], cities)
+      current[:cost] = cost(current[:vector], cities)
       best = current
       max_iterations.times do |iter|
         candidate = {}
